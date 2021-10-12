@@ -38,7 +38,6 @@ void loop() {
     int lengthOfArray = (*(&lights + 1) - lights); // Length af this array
     
     if (button1.isPressed()) { // a...aaaaaaa
-        // if (button1.hasNotBeenReleasedForLessThanOneSecond()) {
 
         // When you have pressed the button turn on one light (a). Then if the button has been pressed solid for ine second. spam aaaaaa
         lights[turnedOnLeds].turnOnLight();
