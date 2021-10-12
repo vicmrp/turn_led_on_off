@@ -24,7 +24,7 @@ class Button {
       // You can handle the debounce of the button directly
       // in the class, so you don't have to think about it
       // elsewhere in your code
-      byte newReading = digitalRead(_pin);
+      byte newReading = digitalRead(_pin); //  Is it HIGH or LOW?
       
       if (newReading != lastReading) {
         lastButtonPressedTime = millis();
@@ -42,4 +42,8 @@ class Button {
     bool isPressed() {
       return (getState() == HIGH);
     }
-}; // don't forget the semicolon at the end of the class
+
+    bool isReleased() {
+        return (getState() == LOW);
+    }
+};

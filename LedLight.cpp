@@ -16,4 +16,14 @@ class LedLight{
     void turnOffLight() {
       digitalWrite(_pin, LOW);
     }
+
+    bool turnedOn() {
+        byte newReading = digitalRead(_pin);
+
+        if (newReading == HIGH) {
+            return true;
+        }
+
+        return false;
+    }
 };
