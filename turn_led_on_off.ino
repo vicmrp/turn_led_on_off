@@ -28,146 +28,44 @@ LedLight led4(LED4);
 Button button1(BUTTON1_PIN);
 
 LedLight lights[4] = {led1, led2, led3, led4};
-int lengthOfArray = (*(&lights + 1) - lights); // Length of array
-// Outputter:
-// timeSinceExecution: <>, lengthOfArray: <>, turnedOnLeds: <>
-
-double getAverage(int arr[], int size) {
-  int i, sum = 0;       
-  double avg;          
-
-   for (i = 0; i < size; ++i) {
-      sum += arr[i];
-   }
-   avg = double(sum) / size;
-
-   return avg;
-}
-
-
-
-void serialPrint(int arr[], int size) {
-    // Serial.begin(9600);
-    int i;
-    for (i = 0; i < size; ++i) {
-        Serial.println("hello world from serialprint");
-    }
-    Serial.println("hello world from serialprint");
-    // Serial.end();
-}
-
-
-
-
+int lightsLength = (*(&lights + 1) - lights); // Length of array
 int turnedOnLeds = 0;
 long timeSinceExecution = 0;
 
 void setup() {
     Serial.begin(9600);
-    // Serial.println("Starting program...");
-    
-
-
-int balance[] = {1000, 2, 3, 17, 50};
-int balanceArrayLength =  (*(&lights + 1) - lights) + 1;
-
-serialPrint(balance, balanceArrayLength);
-// avg = getAverage( balance, balanceArrayLength  ) ;
-// Serial.println(avg);
-Serial.println(balanceArrayLength);
- }
+    Serial.println("Hello world from setup()"); 
+}
 
 void loop() {
 
-    String serialPrint = "timeSinceExecution: ";
-    timeSinceExecution = millis();    
-    // serialPrint.concat(timeSinceExecution);
-    // serialPrint.concat(", lengthOfArray: ");
-    // serialPrint.concat(lengthOfArray);
-    // serialPrint.concat(", turnedOnLeds: ");
-    // serialPrint.concat(turnedOnLeds);
-
-    Serial.println(serialPrint);
-
-    delay(1000);
+    // ---- serial loop status ----- //
+    Serial.println(
+                "millis(): " + String(millis())
+                + ", lightsLength: " + String(lightsLength)
+                + ", turnedOnLeds: " + String(turnedOnLeds));
+    // ---- serial loop status ----- //
 
 
     // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
-        for (int i = 0; i < lengthOfArray; i++) {
-            serialPrint = "lights[";
-            // serialPrint.concat(i);
-            // serialPrint.concat("], turnedOn: ");
-            // serialPrint.concat(lights[i].turnedOn());
-            // Serial.println(serialPrint);
-            lights[i].turnOnLight();
-            delay(100);
-        }
+    for (int i = 0; i < lightsLength; i++) {
+        Serial.println(
+            "lights[" + String(i)
+             + "], turnedOn: " + String(lights[i].turnedOn()));
+             
+        lights[i].turnOnLight();
+    }
     // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
 
 
 
     // ---- Slukker alle lamper hvis alle lamper er tændt ---- //
     if (turnedOnLeds >= 4) {
-        for (int i = 0; i < lengthOfArray; i++) {
-            serialPrint = "lights[";
-            // serialPrint.concat(i);
-            // serialPrint.concat("], turnedOn: ");
-            // serialPrint.concat(lights[i].turnedOn());
-            // Serial.println(serialPrint);
+        for (int i = 0; i < lightsLength; i++) {
             lights[i].turnOffLight();            
         }
         turnedOnLeds = 0;
     }
     // ---- Slukker alle lamper hvis alle lamper er tændt ---- //
-        
-
-
     turnedOnLeds++;
-
-
-
-
-
 }
-
-
-// void loop() {
-//     int lengthOfArray = (*(&lights + 1) - lights); // Length af this array
-    
-//     if (button1.isPressed()) {
-
-//         // When you have pressed the button turn on one light (a). Then if the button has been pressed solid for ine second. spam aaaaaa
-//         lights[turnedOnLeds].turnOnLight();
-//         turnedOnLeds++;
-//         Serial.println("Hej fra setup");
-//         // for (int i = 0; i < lengthOfArray; i++) {
-//         //     lights[i].turnOnLight();
-//         //     delay(100);
-//         // }
-
-//     }
-//     else {
-
-//         // Check if all led's is on
-        
-//         for (int i = 0; i < lengthOfArray; i++) {
-//             if(lights[i].turnedOn()) {
-//                 turnedOnLeds++;
-//             }
-//         }
-
-//         if (turnedOnLeds == 4) {
-//             for (int i = 0; i < lengthOfArray; i++) {
-//                 lights[i].turnOffLight();
-//                 // delay(100);
-                
-//             }
-//             turnedOnLeds = 0;
-//         }
-//     }
-// }
-
-
-
-
-
