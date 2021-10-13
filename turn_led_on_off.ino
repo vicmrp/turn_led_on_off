@@ -61,7 +61,7 @@ void loop() {
     } 
 
     // ---- Slukker alle lamper hvis alle lamper er tændt ---- //
-    if (turnedOnLeds > 4) {
+    if (turnedOnLeds >= 4) {
         for (int i = 0; i < lightsLength; i++) {
             lights[i].turnOffLight();            
         }
