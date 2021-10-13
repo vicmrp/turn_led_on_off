@@ -39,25 +39,23 @@ void setup() {
 
 void loop() {
 
-    // ---- serial loop status ----- //
-    Serial.println(
-                "millis(): " + String(millis())
-                + ", lightsLength: " + String(lightsLength)
-                + ", turnedOnLeds: " + String(turnedOnLeds));
-    // ---- serial loop status ----- //
+    // // ---- serial loop status ----- //
+    // Serial.println(
+    //             "millis(): " + String(millis())
+    //             + ", lightsLength: " + String(lightsLength)
+    //             + ", turnedOnLeds: " + String(turnedOnLeds));
+    // // ---- serial loop status ----- //
 
+    if (button1.isPressed()) {
+        // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
+        for (int i = 0; i < lightsLength; i++) {
 
-    // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
-    for (int i = 0; i < lightsLength; i++) {
-        Serial.println(
-            "lights[" + String(i)
-             + "], turnedOn: " + String(lights[i].turnedOn()));
-             
-        lights[i].turnOnLight();
-    }
-    // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
-
-
+            // if (button1.isReleased()) { break; }
+            turnedOnLeds++;
+            lights[i].turnOnLight();
+        }
+        // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
+    } 
 
     // ---- Slukker alle lamper hvis alle lamper er tændt ---- //
     if (turnedOnLeds >= 4) {
@@ -67,5 +65,18 @@ void loop() {
         turnedOnLeds = 0;
     }
     // ---- Slukker alle lamper hvis alle lamper er tændt ---- //
-    turnedOnLeds++;
+
+    Serial.println(
+        "millis(): " + String(millis())
+        + ", lightsLength: " + String(lightsLength)
+        + ", turnedOnLeds: " + String(turnedOnLeds)
+        + ", lights[" + String(turnedOnLeds)
+        + "], turnedOn: " + String(lights[turnedOnLeds].turnedOn())
+        + ", button1.isPressed() " + String(button1.isPressed())
+        + ", button1.isReleased() " + String(button1.isReleased())
+    );
+
+    delay(2000);
+    // delay(4000);
+
 }

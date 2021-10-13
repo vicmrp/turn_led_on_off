@@ -42,7 +42,6 @@ class Button {
     bool isPressed() {
       return (getState() == HIGH);
     }
-
     bool isReleased() {
         return (getState() == LOW);
     }
