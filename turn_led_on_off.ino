@@ -55,13 +55,14 @@ void loop() {
             if (button1.isReleased()) { break; }
             turnedOnLeds++;
             lights[(lightsLength - turnedOnLeds)].turnOnLight();
-            delay(500);
+            // delay(500);
+            
         }
         // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
     } 
 
     // ---- Slukker alle lamper hvis alle lamper er tændt ---- //
-    if (turnedOnLeds >= 4) {
+    if (turnedOnLeds > 4) {
         for (int i = 0; i < lightsLength; i++) {
             lights[i].turnOffLight();            
         }
