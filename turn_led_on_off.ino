@@ -27,7 +27,7 @@ LedLight led3(LED3);
 LedLight led4(LED4);
 Button button1(BUTTON1_PIN);
 
-LedLight lights[4] = {led1, led2, led3, led4};
+LedLight lights[3] = {led1, led2, led3};
 int lightsLength = (*(&lights + 1) - lights); // Length of array
 int turnedOnLeds = 0;
 long timeSinceExecution = 0;
