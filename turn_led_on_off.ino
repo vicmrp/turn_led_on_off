@@ -8,7 +8,7 @@
 #define LED4 5
 
 // Defing the BUTTON-pins
-#define BUTTON1_PIN 1
+#define BUTTON1_PIN 13
 #define BUTTON2_PIN 11
 
 // Description
@@ -48,6 +48,8 @@ void loop() {
 
     if (button1.isPressed()) {
         // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
+
+        
         for (int i = 0; i < lightsLength; i++) {
 
             // if (button1.isReleased()) { break; }
