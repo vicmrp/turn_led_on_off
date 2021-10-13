@@ -27,7 +27,7 @@ LedLight led3(LED3);
 LedLight led4(LED4);
 Button button1(BUTTON1_PIN);
 
-LedLight lights[3] = {led1, led2, led3};
+LedLight lights[] = {led1, led2, led3, led4};
 int lightsLength = (*(&lights + 1) - lights); // Length of array
 int turnedOnLeds = 0;
 long timeSinceExecution = 0;
@@ -50,17 +50,18 @@ void loop() {
         // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
 
         
-        for (int i = 0; i < lightsLength; i++) {
+        for (int i = 0; i < (lightsLength - turnedOnLeds); i++) {
 
-            // if (button1.isReleased()) { break; }
+            if (button1.isReleased()) { break; }
             turnedOnLeds++;
-            lights[i].turnOnLight();
+            lights[(lightsLength - turnedOnLeds)].turnOnLight();
+            delay(500);
         }
         // ---- Starter alle lamper en efter en med 100 milisekunders mellemrum ---- //
     } 
 
     // ---- Slukker alle lamper hvis alle lamper er tændt ---- //
-    if (turnedOnLeds >= 4) {
+    if (turnedOnLeds > 4) {
         for (int i = 0; i < lightsLength; i++) {
             lights[i].turnOffLight();            
         }
@@ -77,8 +78,5 @@ void loop() {
         + ", button1.isPressed() " + String(button1.isPressed())
         + ", button1.isReleased() " + String(button1.isReleased())
     );
-
-    delay(2000);
-    // delay(4000);
 
 }
